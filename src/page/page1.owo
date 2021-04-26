@@ -1,0 +1,228 @@
+<template lang="pug">
+.page-1
+  .so.so-0
+    img.so.so-1(src="@|jisuan-35.png|")
+    img.so.so-2(src="@|jisuan-33.png|" o-tap="showMenu()")
+    img.so.so-3(src="@|jisuan-31.png|" o-tap="shengcheng()")
+    img.so.so-4(src="@|jisuan-29.png|" o-tap="changeType('机动车')")
+    img.so.so-5(src="@|jisuan-27.png|" o-tap="changeType('营运机动车')")
+    img.so.so-6(src="@|jisuan-25.png|" o-animation="flicker")
+    img.so.so-7(src="@|jisuan-23.png|" o-tap="jia(10)")
+    img.so.so-8(src="@|jisuan-21.png|" o-tap="jia(10)")
+    img.so.so-9(src="@|jisuan-19.png|" o-tap="jia(10)")
+    img.so.so-10(src="@|jisuan-17.png|" o-tap="jia(10)")
+    img.so.so-11(src="@|jisuan-15.png|" o-tap="jia(10)")
+    img.so.so-12(src="@|jisuan-13.png|" o-tap="jia(10)")
+    img.so.so-13(src="@|jisuan-11.png|" o-tap="jia(10)")
+    img.so.so-14(src="@|jisuan-9.png|" o-tap="jia(10)")
+    img.so.so-15(src="@|jisuan-7.png|")
+    img.so.so-16(src="@|jisuan-5.png|")
+    img.so.so-17(src="@|jisuan-3.jpg|")
+    img.jiujia(src="@|jiujia.png|")
+    img.zhangdan(src="@|zhangdan.png|")
+    .jiujing-text
+    .jiujing-show
+    .text 机动车
+    .electricity
+      .lave.lave1
+      .lave.lave2
+      .lave.lave3
+    
+</template>
+
+<script>
+  module.exports = {
+    data: {
+      showMenu: false,
+      text: '机动车',
+      jiujing: 0,
+    },
+    created: function () {
+      this.$el.setAttribute("lave", "1")
+    },
+    changeType: function (text) {
+      this.data.text = text
+      this.query('.text').innerText = text
+    },
+    showMenu: function () {
+      this.data.showMenu = !this.data.showMenu
+      if (this.data.showMenu) {
+        this.query('.so-1').style.display = 'block'
+      } else {
+        this.query('.so-1').style.display = 'none'
+      }
+    },
+    jia: function (num) {
+      this.data.jiujing += parseInt(num)
+      console.log(this.data.jiujing)
+      if (this.data.jiujing > 100) {
+        this.$el.setAttribute("lave", "3")
+      } else if (this.data.jiujing > 20) {
+        this.$el.setAttribute("lave", "2")
+      }
+      this.query('.so-6').style.display = 'none'
+      this.query('.jiujia').style.display = 'block'
+      this.query('.jiujing-text').innerText = `酒精${this.data.jiujing}g`
+      this.query('.jiujing-show').innerText = `${this.data.jiujing}mg/100ml`
+    },
+    shengcheng: function () {
+      this.query('.zhangdan').style.top = '89px'
+      setTimeout(() => {
+        owo.go('page2//rotateRightSideFirst/moveFromRight&&delay200/true')
+      }, 2000);
+    }
+  }
+</script>
+
+
+<style lang="less">
+.so-0 {
+  left: 0px;
+  top: 0px;
+  width: 750px;
+  height: 1508px;
+  z-index: 0;;
+}
+.so-1 {
+  left: 405px;
+  top: 646px;
+  z-index: 10;
+  display: none;
+}
+.so-2 {
+  left: 658px;
+  top: 1241px;
+  z-index: -2;
+}
+.so-3 {
+  left: 469px;
+  top: 1040px;
+  z-index: -3;
+}
+.so-4 {
+  left: 469px;
+  top: 843px;
+  z-index: -4;
+}
+.so-5 {
+  left: 469px;
+  top: 933px;
+  z-index: -5;
+}
+.so-6 {
+  left: 311px;
+  top: 651px;
+  z-index: -6;
+}
+.so-7 {
+  left: 189px;
+  top: 1103px;
+  z-index: -7;
+}
+.so-8 {
+  left: 189px;
+  top: 1016px;
+  z-index: -8;
+}
+.so-9 {
+  left: 189px;
+  top: 930px;
+  z-index: -9;
+}
+.so-10 {
+  left: 189px;
+  top: 843px;
+  z-index: -10;
+}
+.so-11 {
+  left: 324px;
+  top: 1103px;
+  z-index: -11;
+}
+.so-12 {
+  left: 324px;
+  top: 1016px;
+  z-index: -12;
+}
+.so-13 {
+  left: 324px;
+  top: 930px;
+  z-index: -13;
+}
+.so-14 {
+  left: 324px;
+  top: 843px;
+  z-index: -14;
+}
+.so-15 {
+  left: 0px;
+  top: 176px;
+  z-index: -15;
+}
+.so-16 {
+  left: 193px;
+  top: 174px;
+  z-index: -18;
+}
+.so-17 {
+  left: 0px;
+  top: 0px;
+  z-index: -20;
+}
+.text {
+  position: absolute;
+  right: 190px;
+  font-size: 22px;
+  top: 743px;
+}
+.electricity {
+  height: 14px;
+  top: 555px;
+  position: absolute;
+  left: 518px;
+  display: flex;
+  width: 24px;
+  .lave {
+    height: 14px;
+    width: 8px;
+    background-color: black;
+  }
+}
+.jiujia {
+  position: absolute;
+  left: 13px;
+  right: 0;
+  margin: auto;
+  top: 615px;
+  display: none;
+}
+.jiujing-text {
+  position: absolute;
+  left: 214px;
+  top: 743px;
+  font-size: 21px;
+  color: #374756;
+}
+.jiujing-show {
+  position: absolute;
+  top: 656px;
+  width: 312px;
+  line-height: 50px;
+  left: 10px;
+  right: 0;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 28px;
+  color: white;
+}
+.zhangdan {
+  position: absolute;
+  left: 21px;
+  right: 0;
+  margin: auto;
+  top: 89px;
+  z-index: -17;
+  top: 455px;
+  transition: top 1.5s;
+}
+</style>

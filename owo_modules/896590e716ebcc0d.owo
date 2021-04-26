@@ -1,0 +1,142 @@
+<template lang="pug">
+.loading-box
+  img.loading(src="@|qiche.png|")
+  .loading-bar
+    .num-bar
+  img.show(src="@|show-logo.png|")
+  .num 0%
+</template>
+
+<script>
+  module.exports = {
+    data: {
+      imgList: [
+        "@|jisuan-3.jpg|",
+        "@|3-4.png|",
+        "@|jisuan-7.png|",
+        "@|jisuan-35.png|",
+        "@|zhangdan.png|",
+        "@|jisuan-5.png|",
+        "@|show-logo.png|",
+        "@|qiche.png|",
+        "@|3-26.png|",
+        "@|3-27.png|",
+        "@|jisuan-27.png|",
+        "@|jisuan-31.png|",
+        "@|jisuan-13.png|",
+        "@|jisuan-11.png|",
+        "@|jisuan-9.png|",
+        "@|jisuan-29.png|",
+        "@|jisuan-15.png|",
+        "@|jisuan-17.png|",
+        "@|jisuan-19.png|",
+        "@|jisuan-23.png|",
+        "@|jisuan-21.png|",
+        "@|jisuan-25.png|",
+        "@|jisuan-33.png|",
+        "@|jiujia.png|",
+      ]
+    },
+    show: function () {
+      const mum = owo.query('.num')[0]
+      const numBar = owo.query('.num-bar')[0]
+      this.preloadImages(this.data.imgList, (e) => {
+        setTimeout(() => {
+          owo.go('page1////true')
+        }, 500)
+      }, (num) => {
+        numBar.style.width = num + '%'
+        mum.innerHTML = num + '%'
+      })
+    },
+    preloadImage: function (src, successFn) {
+      var image = new Image()
+      image.src = src
+      image.onload = function () {
+        successFn && successFn(src)
+      }
+      image.onerror = function (error) {
+        successFn && successFn(src)
+      }
+    },
+    preloadImages: function (srcs, doneFn, progressFn) {
+      if (!Array.isArray(srcs)) {
+        console.log('第一个参数只能是一个数组')
+      } else {
+        var allCount = srcs.length
+        var doneCount = 0
+        srcs.forEach((srcItem) => {
+          this.preloadImage(srcItem, function () {
+            doneCount++
+            progressFn && progressFn(Math.ceil(100 * doneCount / allCount))
+            if (doneCount === allCount) {
+              doneFn && doneFn()
+            }
+          })
+        })
+      }
+    }
+  }
+</script>
+
+
+<style lang="less">
+.loading-box {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+}
+.loading {
+  position: absolute;
+  left: 0;
+  // right: 0;
+  top: -16%;
+  bottom: 0;
+  margin: auto;
+}
+.loading-bar {
+  position: absolute;
+  top: 0%;
+  bottom: 0%;
+  height: 20px;
+  background-color: white;
+  width: 80%;
+  margin: auto;
+  left: 0;
+  right: 0;
+  border-radius: 20px;
+  padding: 4px;
+  box-shadow: 2px 3px 9px #5d739c;
+}
+.num-bar {
+  background-color: #6b5be5;
+  height: 20px;
+  border-radius: 20px;
+  width: 0%;
+  transition: width 0.5s;
+}
+.num, .text {
+  position: absolute;
+  top: 0%;
+  bottom: -8%;
+  margin: auto;
+  line-height: 50px;
+  height: 50px;
+  font-size: 36px;
+  width: 100%;
+  text-align: center;
+  color: #6b5be5;
+  font-weight: bold;
+}
+.text {
+  bottom: -14%;
+}
+.show {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  bottom: 225px;
+}
+</style>
+ 

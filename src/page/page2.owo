@@ -1,0 +1,35 @@
+<template lang="pug">
+.page2
+  .so.so-0
+    img.so.so-1(src="@|3-27.png|" o-tap="owo.tool.toast('长按上方海报分享')")
+    img.so.so-2(src="@|3-26.png|" o-animation="shrink" o-tap="owo.script.share.switchShare()")
+    img.so.so-3(src="@|3-4.png|")
+</template>
+<script>
+module.exports = {
+}
+</script>
+<style lang="less">
+.so-0 {
+  left: 49px;
+  top: 222px;
+  width: 679px;
+  height: 1019px;
+  z-index: 0;;
+}
+.so-1 {
+  left: 69px;
+  top: 941px;
+  z-index: -1;
+}
+.so-2 {
+  left: 371px;
+  top: 941px;
+  z-index: -2;
+}
+.so-3 {
+  left: 0px;
+  top: 0px;
+  z-index: -3;
+}
+</style>
