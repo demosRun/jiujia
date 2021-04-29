@@ -10,6 +10,9 @@ module.exports = {
 }
 </script>
 <style lang="less">
+.page2 {
+  background-image: url('@|jisuan-3.jpg|');
+}
 .so-0 {
   left: 49px;
   top: 222px;

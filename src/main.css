@@ -62,3 +62,11 @@ h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, form, bu
 .page-1[lave="2"] .lave3 {
   display: none;
 }
+
+.page-1[lave="2"] .jiujing-info-1 {
+  display: block;
+}
+
+.page-1[lave="3"] .jiujing-info-2 {
+  display: block;
+}

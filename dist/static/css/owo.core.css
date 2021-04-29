@@ -117,31 +117,6 @@ li {
   margin: auto;
   bottom: 225px;
 }
-@-webkit-keyframes flicker {
-  from {
-    opacity: 100%;
-  }
-
-  to {
-    opacity: 20%;
-  }
-}
-
-@keyframes flicker {
-  from {
-    opacity: 100%;
-  }
-
-  to {
-    opacity: 20%;
-  }
-}
-
-[o-animation="flicker"] {
-  -webkit-animation: flicker 2s linear 0s infinite alternate;
-  animation: flicker 2s linear 0s infinite alternate;
-}
-
 .page-1 .so-0 {
   left: 0px;
   top: 0px;
@@ -167,18 +142,21 @@ li {
   left: 469px;
   top: 1040px;
   z-index: -3;
+  width: 117px;
 }
 
 .page-1 .so-4 {
   left: 469px;
   top: 843px;
   z-index: -4;
+  width: 117px;
 }
 
 .page-1 .so-5 {
   left: 469px;
   top: 933px;
   z-index: -5;
+  width: 117px;
 }
 
 .page-1 .so-6 {
@@ -301,7 +279,7 @@ li {
   right: 0;
   margin: 0 auto;
   text-align: center;
-  font-size: 28px;
+  font-size: 22px;
   color: white;
 }
 
@@ -315,6 +293,18 @@ li {
   top: 455px;
   transition: top 1.5s;
 }
+
+.page-1 .button:active {
+  transform: scale(0.9);
+}
+
+.page-1 .jiujing-info {
+  position: absolute;
+  top: 550px;
+  left: 270px;
+  font-size: 22px;
+  display: none;
+}
 [o-animation="shrink"] {
   -webkit-animation: shrink 1s linear alternate infinite;
   animation: shrink 1s linear alternate infinite;
@@ -326,6 +316,10 @@ li {
 @keyframes shrink{
   0%{transform:scale(0.9);}
   100%{transform:scale(1);}
+}
+
+.page2 {
+  background-image: url('../resource/jisuan-3.jpg');
 }
 
 .page2 .so-0 {
@@ -371,45 +365,34 @@ li {
   width: 67%;
 }
 /* 页面切换动画 */
-.o-page-rotateRightSideFirst {
-	-webkit-transform-origin: 0% 50%;
-	-webkit-animation: rotateRightSideFirst .8s both ease-in;
-	-moz-transform-origin: 0% 50%;
-	-moz-animation: rotateRightSideFirst .8s both ease-in;
-	transform-origin: 0% 50%;
-	animation: rotateRightSideFirst .8s both ease-in;
+.o-page-moveToBottom {
+	-webkit-animation: moveToBottom .6s ease both;
+	-moz-animation: moveToBottom .6s ease both;
+	animation: moveToBottom .6s ease both;
 }
 
-@-webkit-keyframes rotateRightSideFirst {
-	40% { -webkit-transform: rotateY(15deg); opacity: .8; -webkit-animation-timing-function: ease-out; }
-	100% { -webkit-transform: scale(0.8) translateZ(-200px); opacity:0; }
+@-webkit-keyframes moveToBottom {
+	to { -webkit-transform: translateY(100%); }
 }
-@-moz-keyframes rotateRightSideFirst {
-	40% { -moz-transform: rotateY(15deg); opacity: .8; -moz-animation-timing-function: ease-out; }
-	100% { -moz-transform: scale(0.8) translateZ(-200px); opacity:0; }
+@-moz-keyframes moveToBottom {
+	to { -moz-transform: translateY(100%); }
 }
-@keyframes rotateRightSideFirst {
-	40% { transform: rotateY(15deg); opacity: .8; animation-timing-function: ease-out; }
-	100% { transform: scale(0.8) translateZ(-200px); opacity:0; }
+@keyframes moveToBottom {
+	to { transform: translateY(100%); }
 }
-.o-page-moveFromRight {
-	-webkit-animation: moveFromRight .6s ease both;
-	-moz-animation: moveFromRight .6s ease both;
-	animation: moveFromRight .6s ease both;
+.o-page-moveFromTop {
+	-webkit-animation: moveFromTop .6s ease both;
+	-moz-animation: moveFromTop .6s ease both;
+	animation: moveFromTop .6s ease both;
 }
 
-@-webkit-keyframes moveFromRight {
-	from { -webkit-transform: translateX(100%); }
+@-webkit-keyframes moveFromTop {
+	from { -webkit-transform: translateY(-100%); }
 }
-@-moz-keyframes moveFromRight {
-	from { -moz-transform: translateX(100%); }
+@-moz-keyframes moveFromTop {
+	from { -moz-transform: translateY(-100%); }
 }
-@keyframes moveFromRight {
-	from { transform: translateX(100%); }
-}
-.o-page-delay200 {
-	-webkit-animation-delay: .2s !important;
-	-moz-animation-delay: .2s !important;
-	animation-delay: .2s !important;
+@keyframes moveFromTop {
+	from { transform: translateY(-100%); }
 }
 

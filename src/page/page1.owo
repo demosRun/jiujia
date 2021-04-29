@@ -3,26 +3,28 @@
   .so.so-0
     img.so.so-1(src="@|jisuan-35.png|")
     img.so.so-2(src="@|jisuan-33.png|" o-tap="showMenu()")
-    img.so.so-3(src="@|jisuan-31.png|" o-tap="shengcheng()")
-    img.so.so-4(src="@|jisuan-29.png|" o-tap="changeType('机动车')")
-    img.so.so-5(src="@|jisuan-27.png|" o-tap="changeType('营运机动车')")
-    img.so.so-6(src="@|jisuan-25.png|" o-animation="flicker")
-    img.so.so-7(src="@|jisuan-23.png|" o-tap="jia(10)")
-    img.so.so-8(src="@|jisuan-21.png|" o-tap="jia(10)")
-    img.so.so-9(src="@|jisuan-19.png|" o-tap="jia(10)")
-    img.so.so-10(src="@|jisuan-17.png|" o-tap="jia(10)")
-    img.so.so-11(src="@|jisuan-15.png|" o-tap="jia(10)")
-    img.so.so-12(src="@|jisuan-13.png|" o-tap="jia(10)")
-    img.so.so-13(src="@|jisuan-11.png|" o-tap="jia(10)")
-    img.so.so-14(src="@|jisuan-9.png|" o-tap="jia(10)")
+    img.so.so-3.button(src="@|jisuan-31.png|" o-tap="shengcheng()")
+    img.so.so-4.button(src="@|jisuan-29.png|" o-tap="changeType('机动车')")
+    img.so.so-5.button(src="@|jisuan-27.png|" o-tap="changeType('营运机动车')")
+    img.so.so-6.button(src="@|jisuan-25.png|")
+    img.so.so-7.button(src="@|jisuan-23.png|" o-tap="jia(10, '红酒', 120, 'g')")
+    img.so.so-8.button(src="@|jisuan-21.png|" o-tap="jia(10, '黄酒', 130, 'g')")
+    img.so.so-9.button(src="@|jisuan-19.png|" o-tap="jia(10, '啤酒', 300, 'ml')")
+    img.so.so-10.button(src="@|jisuan-17.png|" o-tap="jia(10, '清酒', 100, 'g')")
+    img.so.so-11.button(src="@|jisuan-15.png|" o-tap="jia(10, '70°白酒', 10, 'g')")
+    img.so.so-12.button(src="@|jisuan-13.png|" o-tap="jia(10, '60°白酒', 15, 'g')")
+    img.so.so-13.button(src="@|jisuan-11.png|" o-tap="jia(10, '50°白酒', 20, 'g')")
+    img.so.so-14.button(src="@|jisuan-9.png|" o-tap="jia(10, '40°白酒', 30, 'g')")
     img.so.so-15(src="@|jisuan-7.png|")
     img.so.so-16(src="@|jisuan-5.png|")
     img.so.so-17(src="@|jisuan-3.jpg|")
     img.jiujia(src="@|jiujia.png|")
     img.zhangdan(src="@|zhangdan.png|")
-    .jiujing-text
+    .jiujing-text 饮酒类别
+    .jiujing-info.jiujing-info-1 饮酒驾驶
+    .jiujing-info.jiujing-info-2 醉酒驾驶
     .jiujing-show
-    .text 机动车
+    .text 车辆类别
     .electricity
       .lave.lave1
       .lave.lave2
@@ -34,8 +36,10 @@
   module.exports = {
     data: {
       showMenu: false,
-      text: '机动车',
+      text: '',
       jiujing: 0,
+      yinke: 0,
+      yinjiuType: ''
     },
     created: function () {
       this.$el.setAttribute("lave", "1")
@@ -52,23 +56,39 @@
         this.query('.so-1').style.display = 'none'
       }
     },
-    jia: function (num) {
-      this.data.jiujing += parseInt(num)
-      console.log(this.data.jiujing)
-      if (this.data.jiujing > 100) {
-        this.$el.setAttribute("lave", "3")
-      } else if (this.data.jiujing > 20) {
-        this.$el.setAttribute("lave", "2")
-      }
+    jia: function (num, name, ke, danwei) {
       this.query('.so-6').style.display = 'none'
       this.query('.jiujia').style.display = 'block'
-      this.query('.jiujing-text').innerText = `酒精${this.data.jiujing}g`
-      this.query('.jiujing-show').innerText = `${this.data.jiujing}mg/100ml`
+      if (this.data.yinjiuType != name) {
+        this.data.yinjiuType = name
+        this.data.jiujing = 0
+        this.data.yinke = 0
+      }
+      this.data.jiujing ++
+      console.log(this.data.jiujing)
+      if (this.data.jiujing >= 4) {
+        this.$el.setAttribute("lave", "3")
+        this.query('.jiujing-show').innerText = `≥ 80（mg/100ml)`
+      } else if (this.data.jiujing >= 1) {
+        this.$el.setAttribute("lave", "2")
+        this.query('.jiujing-show').innerText = `≥ 20，< 80（mg/100ml)`
+      }
+      this.data.yinke += parseInt(ke)
+      this.query('.jiujing-text').innerText = name + this.data.yinke + danwei
+      
     },
     shengcheng: function () {
+      if (!this.data.text) {
+        owo.tool.toast('您尚未选择营运车辆!')
+        return
+      }
+      if (!this.data.jiujing) {
+        owo.tool.toast('您尚未选择饮酒类别!')
+        return
+      }
       this.query('.zhangdan').style.top = '89px'
       setTimeout(() => {
-        owo.go('page2//rotateRightSideFirst/moveFromRight&&delay200/true')
+        owo.go('page2//moveToBottom/moveFromTop/true')
       }, 2000);
     }
   }
@@ -98,16 +118,19 @@
   left: 469px;
   top: 1040px;
   z-index: -3;
+  width: 117px;
 }
 .so-4 {
   left: 469px;
   top: 843px;
   z-index: -4;
+  width: 117px;
 }
 .so-5 {
   left: 469px;
   top: 933px;
   z-index: -5;
+  width: 117px;
 }
 .so-6 {
   left: 311px;
@@ -212,7 +235,7 @@
   right: 0;
   margin: 0 auto;
   text-align: center;
-  font-size: 28px;
+  font-size: 22px;
   color: white;
 }
 .zhangdan {
@@ -224,5 +247,15 @@
   z-index: -17;
   top: 455px;
   transition: top 1.5s;
+}
+.button:active {
+  transform: scale(0.9);
+}
+.jiujing-info {
+  position: absolute;
+  top: 550px;
+  left: 270px;
+  font-size: 22px;
+  display: none;
 }
 </style>
